@@ -23,9 +23,12 @@ const icons = [
 
 const SocialIcons = () => {
   return (
-    <div className=" flex items-center gap-x-2">
-      {icons.map(icon => (
-        <div className={` flex items-center justify-center size-14 rounded-full text-4xl ${icon.bg} ${icon.text}`}>
+    <div className=" flex items-center gap-x-4">
+      {icons.map((icon, index) => (
+        <div
+          key={index}
+          className={` flex items-center justify-center size-14 rounded-full text-4xl ${icon.bg} ${icon.text}`}
+        >
           {icon.name}
         </div>
       ))}
