@@ -1,3 +1,5 @@
+import { SetStateAction } from "react";
+
 export type ButtonVariant = 'default' | 'secondary'
 
 export interface ButtonProps {
@@ -18,3 +20,8 @@ export interface LoginFormValues {
   email: string,
   password: string,
 }
+
+export type NavbarProps = {
+  isOpen: boolean,
+  setIsOpen:React.Dispatch<React.SetStateAction<boolean>>
+};

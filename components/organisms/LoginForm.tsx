@@ -30,10 +30,10 @@ const LoginForm = () => {
       toast.success("Log in Succesful");
       setTimeout(() => {
         router.push("/dashboard");
-      }, 500);
+      }, 1000);
     } catch (error: any) {
       if (error) {
-        toast.error(error.response?.data?.message);
+        toast(error.response?.data?.message);
       }
     }
   };
