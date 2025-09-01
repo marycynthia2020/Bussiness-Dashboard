@@ -1,5 +1,4 @@
 import Login from "@/components/pages/Login";
-// import Signup from "@/components/pages/Signup"
 
 const LoginPage = () => {
   return (
