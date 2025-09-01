@@ -2,10 +2,36 @@
 import Charts from "@/components/molecules/Charts";
 import Navbar from "@/components/organisms/Navbar";
 import MobileMenu from "@/components/organisms/MobileMenu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 const Dashboard = () => {
+  const [currentUser, setCurrentUser] = useState();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const pathName = usePathname();
+  const router = useRouter();
+
+  console.log(pathName);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedItem = localStorage.getItem("user");
+      if (storedItem) {
+        try{
+          setCurrentUser(JSON.parse(storedItem));
+        }catch{
+          localStorage.removeItem("user")
+        }
+      }
+    }
+  }, []);
+
+  useEffect(()=>{
+    if(window.location.pathname === "/dashboard" && currentUser === null) {
+      window.location.href = "/login"
+    }
+  }, [currentUser])
 
   return (
     <div className="relative w-full">

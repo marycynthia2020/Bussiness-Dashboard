@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SocialIcons from "../molecules/socialIcons";
 import Link from "next/link";
 import Button from "../atoms/Button";
@@ -10,7 +10,27 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 
 const LoginForm = () => {
+  const [userDetails, setUserDetails] = useState();
   const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedItem = localStorage.getItem("user");
+      if (storedItem ) {
+        try{
+          setUserDetails(JSON.parse(storedItem));
+        }catch{
+          localStorage.removeItem("user")
+        }
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userDetails){
+      localStorage.setItem("user", JSON.stringify(userDetails));
+    }
+  }, [userDetails]);
 
   const {
     register,
@@ -26,11 +46,11 @@ const LoginForm = () => {
         data
       );
 
-      console.log(response.data);
+      setUserDetails(response.data);
       toast.success("Log in Succesful");
       setTimeout(() => {
         router.push("/dashboard");
-      }, 1000);
+      }, 500);
     } catch (error: any) {
       if (error) {
         toast(error.response?.data?.message);

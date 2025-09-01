@@ -9,7 +9,7 @@ const Button = ({ text, variant, disabled, handleClick }: ButtonProps) => {
   return (
     <button
     disabled={disabled}
-      className={`py-2  px-4 text-xl font-medium w-full rounded-md  ${variantStyles[variant]} ${disabled? "opacity-50": ""}`}
+      className={`py-2  px-4 text-xl font-medium w-full rounded-md cursor-pointer  ${variantStyles[variant]} ${disabled? "opacity-50": ""}`}
       onClick={handleClick}
     >
       {text}
